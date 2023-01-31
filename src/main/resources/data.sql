@@ -1,0 +1,1 @@
+INSERT into users(username, password, create_time, modify_time) VALUES ('test', 'test1234', 1, 1);
