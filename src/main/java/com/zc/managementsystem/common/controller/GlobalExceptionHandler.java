@@ -14,7 +14,7 @@ public class GlobalExceptionHandler {
     public JsonResponse globalException(HttpServletResponse response, Exception ex){
 
         JsonResponse result = new JsonResponse(
-                JsonResponse.RetCodeLoginFailed,
+                JsonResponse.RetCodeUnknownError,
                 "request error:"+ex.getMessage()
         );
         return result;

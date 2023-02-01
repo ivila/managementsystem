@@ -13,21 +13,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 class LoginParams {
-    String userName;
+    String email;
     String password;
 
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
     public String toString() {
         return "LoginParams{" +
-                "userName='" + userName + '\'' +
+                "email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }
@@ -35,7 +35,7 @@ class LoginParams {
 
 @Controller
 public class LoginController {
-    static Logger logger = LogManager.getLogger("main");
+    static Logger logger = LogManager.getLogger(LoginController.class);
     private UserService userService;
 
     @Autowired
@@ -46,14 +46,13 @@ public class LoginController {
     @ResponseBody
     @PostMapping(value="/api/auth/login")
     public JsonResponse login(@RequestBody LoginParams loginParams, HttpServletRequest request) {
-        logger.info(loginParams);
+        logger.info("request params: {}", loginParams);
         // 获取用户信息
-        User user = this.userService.getUserByUserName(loginParams.userName);
-        logger.info(user);
+        User user = this.userService.getUserByEmail(loginParams.email);
         // 用户不存在或者是用户密码不正确就锁定
         if ((user==null) || (loginParams.password.equals(user.getPassword()) == false)) {
             request.changeSessionId();
-            return new JsonResponse(JsonResponse.RetCodeLoginFailed, "Wrong username or password;");
+            return new JsonResponse(JsonResponse.RetCodeLoginFailed, "Wrong email or password;");
         }
         // 设置用户
         HttpSession session = request.getSession();
@@ -64,12 +63,5 @@ public class LoginController {
         return new JsonResponse(null);
     }
 
-    @ResponseBody
-    @GetMapping(value="/api/auth/check")
-    public JsonResponse check(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        // 清理敏感信息
-        User user = (User) session.getAttribute(AuthConst.USER_KEY);
-        return new JsonResponse(user);
-    }
+
 }

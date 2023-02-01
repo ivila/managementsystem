@@ -3,9 +3,10 @@ package com.zc.managementsystem.user.domain;
 public class User {
     private long id;
     private String userName;
+    private String email;
     private String password;
-    private int createTime;
-    private int modifyTime;
+    private long createTime;
+    private long modifyTime;
 
     public void setId(long id) {
         this.id = id;
@@ -27,6 +28,18 @@ public class User {
         this.modifyTime = modifyTime;
     }
 
+    public void setCreateTime(long createTime) {
+        this.createTime = createTime;
+    }
+
+    public void setModifyTime(long modifyTime) {
+        this.modifyTime = modifyTime;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public long getId() {
         return id;
     }
@@ -38,12 +51,16 @@ public class User {
         return password;
     }
 
-    public int getCreateTime() {
+    public long getCreateTime() {
         return createTime;
     }
 
-    public int getModifyTime() {
+    public long getModifyTime() {
         return modifyTime;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     @Override
@@ -51,6 +68,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", userName='" + userName + '\'' +
+                ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", createTime=" + createTime +
                 ", modifyTime=" + modifyTime +

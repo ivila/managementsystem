@@ -3,7 +3,9 @@ package com.zc.managementsystem.common.domain;
 import java.io.Serializable;
 
 public class JsonResponse implements Serializable {
+    public static int RetCodeUnknownError = -1;
     public static int RetCodeLoginFailed = 10001;
+    public static int RetCodeNotFound = 10002;
 
     private int retCode;
     private String message;
