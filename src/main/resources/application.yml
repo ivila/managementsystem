@@ -31,4 +31,3 @@ logging:
         web:
           servlet:
             DispatcherServlet: debug
-

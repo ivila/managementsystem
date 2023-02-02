@@ -61,6 +61,13 @@ class UpdateBookParams extends CreateBookParams {
         this.id = id;
     }
 }
+class DeleteBookParams {
+    long id;
+
+    public void setId(long id) {
+        this.id = id;
+    }
+}
 
 @Controller
 public class BookController {
@@ -131,8 +138,8 @@ public class BookController {
     @NeedPermission({PermissionConst.BOOK_DELETE})
     @ResponseBody
     @PostMapping(value="/api/book/delete")
-    public JsonResponse delete(@RequestParam(value="id") long id) {
-        this.bookDao.deleteByID(id);
+    public JsonResponse delete(@RequestBody DeleteBookParams params) {
+        this.bookDao.deleteByID(params.id);
         return new JsonResponse(null);
     }
 }

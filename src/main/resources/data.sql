@@ -1,6 +1,8 @@
 INSERT into users(username, email, permissions, password, create_time, modify_time) VALUES
     ('test-admin', 'test-admin@xxx.com', 'book-view,book-edit', 'test1234', 1, 1),
-    ('test-admin2', 'test-admin2@xxx.com', 'book-view,book-edit,book-delete', 'test1234', 1, 1)
+    ('test-admin2', 'test-admin2@xxx.com', 'book-view,book-edit,book-delete', 'test1234', 1, 1),
+    ('test-admin3', 'test-admin3@xxx.com', 'book-view,book-edit,book-delete', '16d7a4fca7442dda3ad93c9a726597e4', 1, 1),
+    ('test-admin4', 'test-admin4@xxx.com', 'book-view,book-edit', '16d7a4fca7442dda3ad93c9a726597e4', 1, 1)
 ;
 
 INSERT INTO books(book_name, isbn, author, operator, cover_url, create_time, modify_time) VALUES

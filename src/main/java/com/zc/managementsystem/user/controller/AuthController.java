@@ -34,8 +34,8 @@ class LoginParams {
 }
 
 @Controller
-public class LoginController {
-    static Logger logger = LogManager.getLogger(LoginController.class);
+public class AuthController {
+    static Logger logger = LogManager.getLogger(AuthController.class);
     private UserService userService;
 
     @Autowired
@@ -59,6 +59,16 @@ public class LoginController {
         user.setPassword(null);
         session.setAttribute(AuthConst.USER_KEY, user);
         session.setAttribute(AuthConst.USER_ID_KEY, user.getId());
+        return new JsonResponse(user);
+    }
+
+    @ResponseBody
+    @PostMapping(value="/api/auth/logout")
+    public JsonResponse logout(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.removeAttribute(AuthConst.USER_KEY);
+        session.removeAttribute(AuthConst.USER_ID_KEY);
+        request.changeSessionId();
         return new JsonResponse(null);
     }
 
