@@ -6,6 +6,7 @@ import com.zc.managementsystem.book.domain.BookListParams;
 import com.zc.managementsystem.common.domain.AuthConst;
 import com.zc.managementsystem.common.domain.JsonResponse;
 import com.zc.managementsystem.user.domain.User;
+import com.zc.managementsystem.user.annotation.NeedPermission;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -101,6 +102,7 @@ public class BookController {
         return new JsonResponse(null);
     }
 
+    @NeedPermission({"view"})
     @ResponseBody
     @GetMapping(value="/api/book/get")
     public JsonResponse get(@RequestParam(value="id") long id) {

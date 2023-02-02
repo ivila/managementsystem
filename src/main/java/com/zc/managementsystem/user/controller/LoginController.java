@@ -51,7 +51,6 @@ public class LoginController {
         User user = this.userService.getUserByEmail(loginParams.email);
         // 用户不存在或者是用户密码不正确就锁定
         if ((user==null) || (loginParams.password.equals(user.getPassword()) == false)) {
-            request.changeSessionId();
             return new JsonResponse(JsonResponse.RetCodeLoginFailed, "Wrong email or password;");
         }
         // 设置用户
