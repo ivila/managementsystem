@@ -1,0 +1,26 @@
+{
+    "project_dir_depth": 2,
+    "project_name": "pms",
+    "module_name": "devcenter",
+    "build": {
+        "commands": [
+            "npm run build-env"
+        ],
+        "upload_static": {
+            "static_dir": "dist",
+            "enable_cdn": true
+        },
+        "docker_image": {
+            "base_image": "harbor.shopeemobile.com/seller-center/shopee-nodejs10:latest",
+            "dependent_libraries_files": [
+                "package.json",
+                "package-lock.json"
+            ],
+            "run_commands": [
+                "node -v",
+                "npm install",
+                "pip install -U shopee-deploy-common"
+            ]
+        }
+    }
+}
