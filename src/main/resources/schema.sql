@@ -3,6 +3,7 @@ CREATE table users (
     username varchar(32) not null,
     email varchar(255) not null,
     password varchar(255) not null,
+    permissions text not null,
     create_time bigint not null,
     modify_time bigint not null,
     primary key (id)

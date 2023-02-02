@@ -5,6 +5,7 @@ import com.zc.managementsystem.book.domain.Book;
 import com.zc.managementsystem.book.domain.BookListParams;
 import com.zc.managementsystem.common.domain.AuthConst;
 import com.zc.managementsystem.common.domain.JsonResponse;
+import com.zc.managementsystem.common.domain.PermissionConst;
 import com.zc.managementsystem.user.domain.User;
 import com.zc.managementsystem.user.annotation.NeedPermission;
 import jakarta.servlet.http.HttpServletRequest;
@@ -66,6 +67,7 @@ public class BookController {
     static Logger logger = LogManager.getLogger(BookController.class);
     @Autowired
     private BookDao bookDao;
+    @NeedPermission({PermissionConst.BOOK_EDIT})
     @ResponseBody
     @PostMapping(value="/api/book/create")
     public JsonResponse create(@RequestBody CreateBookParams params, HttpServletRequest request) {
@@ -84,6 +86,7 @@ public class BookController {
         return new JsonResponse(null);
     }
 
+    @NeedPermission({PermissionConst.BOOK_EDIT})
     @ResponseBody
     @PostMapping(value="/api/book/update")
     public JsonResponse update(@RequestBody UpdateBookParams params, HttpServletRequest request) {
@@ -102,7 +105,7 @@ public class BookController {
         return new JsonResponse(null);
     }
 
-    @NeedPermission({"view"})
+    @NeedPermission({PermissionConst.BOOK_VIEW})
     @ResponseBody
     @GetMapping(value="/api/book/get")
     public JsonResponse get(@RequestParam(value="id") long id) {
@@ -113,6 +116,7 @@ public class BookController {
         return new JsonResponse(book);
     }
 
+    @NeedPermission({PermissionConst.BOOK_VIEW})
     @ResponseBody
     @PostMapping(value="/api/book/list")
     public JsonResponse list(@RequestBody BookListParams bookListParams) {
@@ -124,6 +128,7 @@ public class BookController {
         return new JsonResponse(result);
     }
 
+    @NeedPermission({PermissionConst.BOOK_DELETE})
     @ResponseBody
     @PostMapping(value="/api/book/delete")
     public JsonResponse delete(@RequestParam(value="id") long id) {

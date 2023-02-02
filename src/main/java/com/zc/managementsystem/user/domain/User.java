@@ -1,10 +1,13 @@
 package com.zc.managementsystem.user.domain;
 
+import java.util.Set;
+
 public class User {
     private long id;
     private String userName;
     private String email;
     private String password;
+    private Set<String> permissions;
     private long createTime;
     private long modifyTime;
 
@@ -26,6 +29,10 @@ public class User {
 
     public void setModifyTime(int modifyTime) {
         this.modifyTime = modifyTime;
+    }
+
+    public void setPermissions(Set<String> permissions) {
+        this.permissions = permissions;
     }
 
     public void setCreateTime(long createTime) {
@@ -61,6 +68,9 @@ public class User {
 
     public String getEmail() {
         return email;
+    }
+    public boolean hasPermission(String permission) {
+        return this.permissions.contains(permission);
     }
 
     @Override
