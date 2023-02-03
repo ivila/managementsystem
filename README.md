@@ -139,5 +139,5 @@
 
 ## 5. 整合测试
 在本地执行make buildfe以将前端代码编译成原生JS内容，并自动放置到resource/static/dist目录下。
-然后执行make testfe以test环境启动本地测试，对应的网络端口为8889。
+然后执行make testbe以test环境启动本地测试，对应的网络端口为8889。
 然后打开 http://localhost:8889，重复前端测试流程即可。
