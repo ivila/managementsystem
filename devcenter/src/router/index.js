@@ -3,6 +3,7 @@ import { GetInfo } from '@/apis/user.js'
 import { store } from '@/store/index.js'
 import { getRouteObj } from './route.js'
 
+const LoginPath = '/login'
 
 export const router = createRouter({
   routes: getRouteObj(),
@@ -33,7 +34,11 @@ export const reCheckPermission = () => {
   hasCheckTokenValid = false
 }
 
-const LoginPath = '/login'
+export const reLogin = () => {
+  router.push(LoginPath)
+  window.location.reload()
+}
+
 // 对于未登录的，全部检查
 router.beforeEach(async (to, from, next) => {
   let hasPermission = await checkHasPermission()

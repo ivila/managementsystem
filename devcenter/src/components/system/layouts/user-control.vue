@@ -14,6 +14,7 @@
 import screenfull from 'screenfull'
 import { FullScreen, CircleClose } from '@element-plus/icons-vue'
 import { Logout } from '@/apis/auth.js'
+import { reLogin } from '@/router/index.js'
 
 export default {
   data() {
@@ -39,7 +40,7 @@ export default {
     },
     async doLogout () {
       await Logout()
-      window.location.reload()
+      reLogin()
     }
   }
 }

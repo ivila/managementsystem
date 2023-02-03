@@ -2,7 +2,7 @@ import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import { ErrCode } from './libs/constant'
 import { APIError, ValidateError } from './libs/error'
-import { reCheckPermission, router } from './router/index.js'
+import { reLogin } from './router/index.js'
 
 
 export const handleError = (err, vm, info) => {
@@ -12,9 +12,8 @@ export const handleError = (err, vm, info) => {
   // 到这里开始都是要处理的
   if (err instanceof APIError) {
     if (err.retcode === ErrCode.NEED_LOGIN) {
-      reCheckPermission()
       ElMessage.error(`Please Login first`)
-      router.push('/login')
+      reLogin()
       return
     }
     if (err.retcode === ErrCode.INVALID_REQUEST) {
@@ -39,7 +38,7 @@ export const handleError = (err, vm, info) => {
         duration: 10 * 1000,
         showClose: true
       })
-      window.location.reload()
+      reLogin()
       return
     }
     ElMessage.error({

@@ -13,7 +13,7 @@
       </el-form-item>
       <el-form-item prop="operator">
         <el-input v-model="data.operator" placeholder="please input operator" clearable  @keyup.enter="doSearch">
-          <template #prepend>Author</template>
+          <template #prepend>Operator</template>
         </el-input>
       </el-form-item>
       <el-form-item>
