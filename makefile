@@ -13,7 +13,7 @@ debugfe:
 
 
 debugbe:
-	./gradlew bootRun --args='--spring.profiles.active=test'
+	./gradlew bootRun --args='--spring.profiles.active=dev'
 
 
 testbe:
