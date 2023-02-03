@@ -11,6 +11,7 @@
 |test-admin2@xxx.com|test1234|查看，编辑，删除|给后端接口调试用|
 |test-admin3@xxx.com|16d7a4fca7442dda3ad93c9a726597e4|查看，新增|给前端调试页面用，没有删除权限，原始密码test1234|
 |test-admin4@xxx.com|16d7a4fca7442dda3ad93c9a726597e4|查看，新增，编辑，删除|给前端调试页面用，原始密码test1234|
+
 请记住这些账户信息，后面调试时会使用到。
 
 上面提到的权限，对应的所需编码值如下：
@@ -30,6 +31,7 @@
 |开发前端|make debugfe|启动前端dev server，使用端口8081，对应后端连接端口也是8888|
 |构建前端|make buildfe|将前端内容编译成html和js文件，并放置到resource/static下|
 |测试后端|make testbe|需要先构建前端，因为开发模式下是使用前端做路由管理，而实际部署时是由后端做路由管理，不太一样，所以需要单独测试|
+
 开发时应该就使用make debugbe和make debugfe就好了
 
 ## 3. 测试后端接口功能
@@ -40,36 +42,38 @@
 > 注意到的是，对于下述提到的所有接口，在GET时，我们的参数使用Params，在POST时，我们的参数使用JSON。
 
 #### 3.1) [Auth]Login
-请求方式: POST
-路径: /api/auth/login
-作用：用于请求登录并设置好登录态，保证后续请求其它接口时不会被拦截
+请求方式: POST<br/>
+路径: /api/auth/login<br/>
+作用: 用于请求登录并设置好登录态，保证后续请求其它接口时不会被拦截<br/>
 |参数|类型|Required|说明|
 |----|----|----|----|
 |email|string|Y|用户的邮箱|
 |password|string|Y|md5加密后的用户密码信息|
+
 在调试这个接口时，可以直接使用上面提到的test-admin1@xxx.com和test-admin2@xxx.com
 
 #### 3.2) [User]Current
-请求方式: GET
-路径：/api/user/current
-作用：获取当前用户信息，主要提供给前端调用
+请求方式: GET<br/>
+路径：/api/user/current<br/>
+作用：获取当前用户信息，主要提供给前端调用<br/>
 
 ### 3.3) [Book]create
-请求方式: POST
-路径: /api/book/create
-作用：创建一本新的书籍
+请求方式: POST<br/>
+路径: /api/book/create<br/>
+作用：创建一本新的书籍<br/>
 |参数|类型|Required|说明|
 |----|----|----|----|
 |isbn|string|Y|ISBN|
 |bookName|string|Y|图书名称|
 |coverUrl|string|Y|图片链接|
 |author|string|Y|图书作者|
+
 需要book-edit权限
 
 ### 3.4) [Book]update
-请求方式: POST
-路径: /api/book/update
-作用：创建一本新的书籍
+请求方式: POST<br/>
+路径: /api/book/update<br/>
+作用：创建一本新的书籍<br/>
 |参数|类型|Required|说明|
 |----|----|----|----|
 |id|integer|Y|想要修改的书籍ID|
@@ -77,35 +81,39 @@
 |bookName|string|Y|图书名称|
 |coverUrl|string|Y|图片链接|
 |author|string|Y|图书作者|
+
 需要book-edit权限
 
 ### 3.5) [Book]list
-请求方式: POST
-路径: /api/book/list
-作用：查询书籍列表，给前端使用
+请求方式: POST<br/>
+路径: /api/book/list<br/>
+作用：查询书籍列表，给前端使用<br/>
 |参数|类型|Required|说明|
 |----|----|----|----|
 |isbn|string|N|ISBN|
 |author|string|N|作者名称|
 |operator|string|N|最近一次编辑人|
+
 需要book-view权限
 
 ### 3.6) [Book]get
-请求方式: GET
-路径: /api/book/get
-作用：获取书籍信息
+请求方式: GET<br/>
+路径: /api/book/get<br/>
+作用：获取书籍信息<br/>
 |参数|类型|Required|说明|
 |----|----|----|----|
 |id|integer|Y|书籍ID|
+
 需要book-view权限
 
 ### 3.7) [Book]delete
-请求方式: DELETE
-路径: /api/book/delete
-作用：删除书籍
+请求方式: POST<br/>
+路径: /api/book/delete<br/>
+作用：删除书籍<br/>
 |参数|类型|Required|说明|
 |----|----|----|----|
 |id|integer|Y|书籍ID|
+
 需要book-edit权限
 
 ## 4. 测试前端页面操作
@@ -113,7 +121,7 @@
 先在命令行执行make debugfe启动测试进程，对应的网络端口为8081
 
 ### 4.1) 测试登录
-使用浏览器打开 http://localhost:8081，就会看到这个页面：
+使用浏览器打开[http://localhost:8081](http://localhost:8081)，就会看到这个页面：
 ![图片](https://raw.githubusercontent.com/ivila/public_files/master/managementsystem/snapshot/Login.jpg)
 输入账户和密码再点击登录即可。
 在这里可以使用上面提到的test-admin3@xxx.com和test-admin4@xxx.com。
@@ -140,4 +148,4 @@
 ## 5. 整合测试
 在本地执行make buildfe以将前端代码编译成原生JS内容，并自动放置到resource/static/dist目录下。
 然后执行make testbe以test环境启动本地测试，对应的网络端口为8889。
-然后打开 http://localhost:8889，重复前端测试流程即可。
+然后打开[http://localhost:8889](http://localhost:8889)，重复前端测试流程即可。
