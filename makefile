@@ -1,4 +1,5 @@
-
+initfe:
+	cd devcenter && npm install
 
 buildfe:
 	cd devcenter && \

@@ -11,6 +11,9 @@ spring:
     password:
     platform: h2
     separator: ;
+  sql:
+    init:
+      mode: always
   jpa:
     database: h2
     show-sql: true
